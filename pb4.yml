@@ -1,0 +1,27 @@
+- name: Setup Web Browser
+  hosts: all
+  become: yes
+  tasks:
+  - name: Ensure system is updated
+    apt:
+      update_cache: true
+  - name: Ensure nginx is present
+    apt:
+      name: nginx
+      state: present
+  - name: Remove test file
+    file:
+      path: /var/www/html/index.nginx-debian.html
+      state: absent
+  - name: Deploy app
+    git:
+      dest: /var/www/html/
+      repo: https://github.com/sathishg89/food.git
+  - name: Configyre web browser
+    copy:
+      dest: /etc/nginx/sites-available/default
+      src: default
+  - name: restart web services
+    service:
+      name: nginx
+      state: restarted

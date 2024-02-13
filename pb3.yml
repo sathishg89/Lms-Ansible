@@ -1,0 +1,25 @@
+- name: Update Group 1
+  hosts: g1
+  
+  tasks:
+  - name: Ensure to create a directory
+    file:
+      path: /home/ubuntu/mydir4
+      state: directory
+  - name: Ensure to create a directory
+    file:
+      path: /home/ubuntu/mydir5
+      state: directory
+- name: Update Group 2
+  hosts: g2
+
+  tasks:
+  - name: Ensure to create a directory
+    file:
+      path: /home/ubuntu/mydir6
+      state: directory
+  - name: Ensure to create a directory
+    file:
+      path: /home/ubuntu/mydir7
+      state: directory
+
